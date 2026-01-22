@@ -1,0 +1,27 @@
+version: "3.8"
+
+services:
+  waha:
+    image: devlikeapro/waha:arm
+    container_name: waha
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - WAHA_DASHBOARD_USERNAME=waha
+      - WAHA_SWAGGER_USERNAME=admin
+    volumes:
+      - waha_data:/data
+
+  n8n:
+    image: n8nio/n8n:latest
+    container_name: n8n
+    restart: unless-stopped
+    ports:
+      - "5678:5678"
+    volumes:
+      - n8n_data:/home/node/.n8n
+
+volumes:
+  waha_data:
+  n8n_data:
